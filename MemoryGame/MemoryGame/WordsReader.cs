@@ -8,7 +8,9 @@ namespace MemoryGame
 {
     class WordsReader
     {
-        List<string> Words = new List<string>();
+
+
+        public List<string> Words = new List<string>();
 
         public WordsReader(Uri path)
         {
