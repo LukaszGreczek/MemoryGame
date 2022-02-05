@@ -9,8 +9,10 @@ namespace MemoryGame
     class Game
     {
         List<string> Words;
+        int NumberOfWords;
+        int GuessChances;
 
-        string[] SelectedWords = new string[16];
+        WordCard[] SelectedWords;
 
         public Game(List<string> words)
         {
@@ -18,15 +20,37 @@ namespace MemoryGame
         }
 
 
-        public void GetGameWords(int NumberOfWords)
+        public void StartEasyGame()
         {
+            NumberOfWords = 4;
+            GuessChances = 10;
+            
+            GetGameWords();
+
+        }
+
+        public void StartHardGame()
+        {
+            NumberOfWords = 8;
+            GuessChances = 15;
+
+            GetGameWords();
+
+        }
+
+
+        private void GetGameWords()
+        {
+            SelectedWords = new WordCard[(NumberOfWords * 2)];
+
             Random random = new Random();
-            string tmp;
+            WordCard tmp;
+
 
             for (int i = 0; i < (NumberOfWords * 2); i += 2)
             {
                 int index = random.Next(Words.Count);
-                tmp = Words[index];
+                tmp = new WordCard(Words[index],WordCardStatus.Hiden);
 
                 if (Array.Exists(SelectedWords, word => word == tmp))
                 {
@@ -42,7 +66,7 @@ namespace MemoryGame
             }
 
             SelectedWords = SelectedWords.OrderBy(x => random.Next()).ToArray();
-            
+            Console.WriteLine();
         }
 
 
