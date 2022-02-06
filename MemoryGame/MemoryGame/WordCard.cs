@@ -21,5 +21,15 @@ namespace MemoryGame
         {
             get; set;
         }
+
+        public string DisplayWord()
+        {
+            if(CardStatus == WordCardStatus.Hiden)
+            return "X";
+            else
+            {
+                return Word;
+            }
+        }
     }
 }

@@ -24,8 +24,9 @@ namespace MemoryGame
         {
             NumberOfWords = 4;
             GuessChances = 10;
-            
+
             GetGameWords();
+            DisplayGame();
 
         }
 
@@ -35,7 +36,7 @@ namespace MemoryGame
             GuessChances = 15;
 
             GetGameWords();
-
+            DisplayGame();
         }
 
 
@@ -50,7 +51,7 @@ namespace MemoryGame
             for (int i = 0; i < (NumberOfWords * 2); i += 2)
             {
                 int index = random.Next(Words.Count);
-                tmp = new WordCard(Words[index],WordCardStatus.Hiden);
+                tmp = new WordCard(Words[index], WordCardStatus.Hiden);
 
                 if (Array.Exists(SelectedWords, word => word == tmp))
                 {
@@ -66,8 +67,30 @@ namespace MemoryGame
             }
 
             SelectedWords = SelectedWords.OrderBy(x => random.Next()).ToArray();
-            Console.WriteLine();
         }
+
+        private void DisplayGame()
+        {
+            if (NumberOfWords == 4)
+            {
+                Console.WriteLine("Level: easy");
+            }
+            else
+            {
+                Console.WriteLine("Level: hard");
+            }
+
+            Console.WriteLine($"Guess chances: {GuessChances}");
+
+            Console.WriteLine("    1   2   3   4");
+
+            for (int i = 0; i < NumberOfWords / 2; i++)
+            {
+                Console.WriteLine($"{(char)(65 + i)}   {SelectedWords[i].DisplayWord()}   {SelectedWords[i + 1].DisplayWord()}   {SelectedWords[i + 2].DisplayWord()}   {SelectedWords[i + 3].DisplayWord()}");
+            }
+              
+        }
+
 
 
     }

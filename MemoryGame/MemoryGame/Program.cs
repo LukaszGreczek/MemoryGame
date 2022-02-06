@@ -13,7 +13,7 @@ namespace MemoryGame
             WordsReader wr = new WordsReader(uri);
 
             Game game = new Game(wr.Words);
-            game.StartEasyGame();
+            game.StartHardGame();
         }
     }
 }
